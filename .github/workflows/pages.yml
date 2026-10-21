@@ -1,0 +1,58 @@
+name: Deploy static demo to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: pdo_sqlite, sqlite3, mbstring
+
+      - name: Prepare env
+        run: |
+          cp .env.example .env
+          mkdir -p public/uploads/items public/uploads/avatars
+
+      - name: Start PHP server
+        run: |
+          php -S 127.0.0.1:8000 -t public > /dev/null 2>&1 &
+          sleep 3
+
+      - name: Export pages as static HTML
+        run: |
+          mkdir site
+          cd site
+          wget --mirror --convert-links --adjust-extension --page-requisites \
+               --no-parent -nH -e robots=off http://127.0.0.1:8000/ || true
+          for p in how-it-works login register leaderboard; do
+            wget -q --convert-links --adjust-extension --page-requisites -nH \
+                 -P "$p" "http://127.0.0.1:8000/$p" || true
+          done
+          touch .nojekyll
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
