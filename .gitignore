@@ -1,5 +1,4 @@
-﻿.env
-database/campuslend.sqlite
+.env
 public/uploads/items/*
 public/uploads/avatars/*
 __pycache__/
