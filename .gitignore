@@ -1,0 +1,25 @@
+# Environment variables (use .env.example as template)
+.env
+
+# Test cookies and logs
+tests/cookie*.txt
+*.cookie
+*.log
+
+# Python cache and environments
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+
+# System and OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor artifacts
+.vscode/
+.idea/
+.antigravity-ide/
