@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <link rel="icon" type="image/png" href="/campuslend/assets/img/icon-192.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="18a22eebed1ce8c2a26ea8381e404a0608e1a19ca87e49414b190833f2bdb4af">
+    <meta name="description" content="CampusLend – Emergency Campus Borrowing Platform for Uka Tarsadia University students. Borrow calculators, drafters, chargers, pens, lab coats in seconds.">
+    
+    <title>Student Registration - CampusLend</title>
+    
+    <!-- Google Fonts: Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons via unpkg -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- GSAP for micro-animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    
+    <!-- Core Application Stylesheet -->
+    <link rel="stylesheet" href="/campuslend/assets/css/main.css?v=1792520298">
+    <link rel="manifest" href="/campuslend/manifest.json">
+    <meta name="theme-color" content="#4f46e5">
+</head>
+<body>
+
+<!-- Static Preview Announcement Banner (Injected by export_static.py) -->
+<div class="static-preview-banner" style="background: linear-gradient(90deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%); color: #e0e7ff; padding: 10px 16px; font-size: 0.85rem; font-weight: 500; text-align: center; border-bottom: 1px solid rgba(99, 102, 241, 0.4); display: flex; align-items: center; justify-content: center; gap: 8px; z-index: 10001; position: relative;">
+    <span style="font-size: 1rem;">ℹ️</span>
+    <span>Static design preview – login, feed and chat need the PHP backend. Run locally to use the full app.</span>
+</div>
+
+
+    <!-- Exam Season Alert Banner -->
+            <div class="exam-banner" id="exam-banner">
+        <span>📢 Mid-Term Exam Alert: Emergency requests for Calculators, Drafters, and Lab Coats are prioritized. Return borrowed items on time!</span>
+    </div>
+    
+    <!-- Header Navigation -->
+    <header class="navbar" id="main-navbar">
+    <div class="container navbar-inner">
+        <!-- Logo -->
+        <a href="/campuslend/" class="brand-logo">
+            <span style="font-size: 1.6rem;">🤝</span>
+            <span>CampusLend</span>
+            <span class="brand-badge">UTU</span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/campuslend/" class="nav-link">Live Feed</a></li>
+                <li><a href="/campuslend/" class="nav-link">Browse Items</a></li>
+                <li><a href="/campuslend/how-it-works/" class="nav-link">How It Works</a></li>
+                <li><a href="/campuslend/" class="nav-link">Leaderboard</a></li>
+            </ul>
+        </nav>
+
+        <!-- User Actions & Controls -->
+        <div class="nav-actions">
+            <!-- Dark / Light Mode Switcher -->
+            <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Theme" aria-label="Toggle dark and light theme">
+                <i data-lucide="moon"></i>
+            </button>
+
+                            <!-- Guest Actions -->
+                <a href="/campuslend/login/" class="btn btn-outline btn-sm">Sign In</a>
+                <a href="/campuslend/register/" class="btn btn-primary btn-sm">Join Campus</a>
+                    </div>
+    </div>
+</header>
+
+    <!-- Main Content Body -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Flash Message Alerts -->
+            
+            
+            
+            
+            <!-- Page Output Injection -->
+            
+<div style="max-width: 580px; margin: 20px auto 40px auto;">
+    <div class="glass-card" style="padding: 36px; border-radius: var(--radius-xl);">
+        <!-- Card Header -->
+        <div style="text-align: center; margin-bottom: 28px;">
+            <div style="width: 54px; height: 54px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; margin: 0 auto 14px auto;">
+                🎓
+            </div>
+            <h1 style="font-size: 1.75rem; margin-bottom: 6px;">Create Campus Account</h1>
+            <p style="color: var(--text-muted); font-size: 0.92rem;">
+                Exclusively for students of <strong>Uka Tarsadia University</strong>
+            </p>
+            <div style="display: inline-block; background: var(--primary-light); color: var(--primary); font-size: 0.78rem; font-weight: 700; padding: 4px 12px; border-radius: var(--radius-full); margin-top: 8px;">
+                Domain Required: @utu.ac.in            </div>
+        </div>
+
+        <!-- Registration Form -->
+        <form method="POST" action="/campuslend/register/" id="register-form" novalidate>
+            <input type="hidden" name="csrf_token" value="18a22eebed1ce8c2a26ea8381e404a0608e1a19ca87e49414b190833f2bdb4af">
+            <!-- Full Name -->
+            <div class="form-group">
+                <label for="full_name" class="form-label">Full Name *</label>
+                <input type="text" id="full_name" name="full_name" class="form-control " placeholder="e.g. Aarav Patel" value="" required>
+                            </div>
+
+            <!-- Campus Email -->
+            <div class="form-group">
+                <label for="email" class="form-label">Campus Email Address *</label>
+                <div style="position: relative;">
+                    <input type="email" id="email" name="email" class="form-control " placeholder="e.g. yourname@utu.ac.in" value="" required>
+                </div>
+                <div class="form-hint" id="domain-hint">Must end with @utu.ac.in. An OTP will be dispatched to this address.</div>
+                            </div>
+
+            <!-- Enrollment Number & Department Grid -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="form-group">
+                    <label for="enrollment_no" class="form-label">Enrollment Number *</label>
+                    <input type="text" id="enrollment_no" name="enrollment_no" class="form-control " placeholder="e.g. 202303100110001" value="" required>
+                                    </div>
+
+                <div class="form-group">
+                    <label for="department" class="form-label">Department *</label>
+                    <select id="department" name="department" class="form-control " required>
+                        <option value="">Select Department</option>
+                                                    <option value="Computer Engineering" >
+                                Computer Engineering                            </option>
+                                                    <option value="Information Technology" >
+                                Information Technology                            </option>
+                                                    <option value="Computer Applications (BCA / MCA)" >
+                                Computer Applications (BCA / MCA)                            </option>
+                                                    <option value="Mechanical Engineering" >
+                                Mechanical Engineering                            </option>
+                                                    <option value="Civil Engineering" >
+                                Civil Engineering                            </option>
+                                                    <option value="Electrical Engineering" >
+                                Electrical Engineering                            </option>
+                                                    <option value="Pharmacy (B.Pharm / M.Pharm)" >
+                                Pharmacy (B.Pharm / M.Pharm)                            </option>
+                                                    <option value="Biotechnology / Life Sciences" >
+                                Biotechnology / Life Sciences                            </option>
+                                                    <option value="Management Studies (BBA / MBA)" >
+                                Management Studies (BBA / MBA)                            </option>
+                                                    <option value="Architecture (B.Arch)" >
+                                Architecture (B.Arch)                            </option>
+                                                    <option value="Interior Design" >
+                                Interior Design                            </option>
+                                                    <option value="Physiotherapy / Nursing" >
+                                Physiotherapy / Nursing                            </option>
+                                            </select>
+                                    </div>
+            </div>
+
+            <!-- Year of Study & Phone Grid -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="form-group">
+                    <label for="year_of_study" class="form-label">Year of Study *</label>
+                    <select id="year_of_study" name="year_of_study" class="form-control " required>
+                                                    <option value="1st Year" >
+                                1st Year                            </option>
+                                                    <option value="2nd Year" >
+                                2nd Year                            </option>
+                                                    <option value="3rd Year" >
+                                3rd Year                            </option>
+                                                    <option value="4th Year" >
+                                4th Year                            </option>
+                                                    <option value="PG / Masters" >
+                                PG / Masters                            </option>
+                                            </select>
+                                    </div>
+
+                <div class="form-group">
+                    <label for="phone" class="form-label">Phone / WhatsApp *</label>
+                    <input type="tel" id="phone" name="phone" class="form-control " placeholder="e.g. 9825100000" value="" required>
+                                    </div>
+            </div>
+
+            <!-- Password -->
+            <div class="form-group">
+                <label for="password" class="form-label">Password *</label>
+                <input type="password" id="password" name="password" class="form-control " placeholder="At least 6 characters" required>
+                            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 14px; font-size: 1rem; margin-top: 10px;">
+                <span>Create Campus Account & Send OTP</span> →
+            </button>
+        </form>
+
+        <!-- Footer Link -->
+        <div style="text-align: center; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-glass); font-size: 0.92rem; color: var(--text-muted);">
+            Already have a verified account? <a href="/campuslend/login/" style="font-weight: 700;">Sign In</a>
+        </div>
+    </div>
+</div>
+
+<script>
+// Client-side domain check helper
+document.getElementById('email').addEventListener('input', function() {
+    const domain = "utu.ac.in";
+    const val = this.value.trim().toLowerCase();
+    const hint = document.getElementById('domain-hint');
+    if (val.length > 5 && !val.endsWith('@' + domain) && !val.endsWith('.' + domain)) {
+        hint.style.color = '#ef4444';
+        hint.textContent = `⚠️ Please ensure your email ends with @${domain}`;
+    } else {
+        hint.style.color = 'var(--text-muted)';
+        hint.textContent = `Must end with @${domain}. An OTP will be dispatched to this address.`;
+    }
+});
+</script>
+        </div>
+    </main>
+
+    <!-- Floating Emergency SOS Button -->
+    <a href="/campuslend/login/" class="floating-sos-btn" id="floating-sos-btn" title="One-Click Emergency Request">
+        <span>🚨</span>
+        <span>SOS Request</span>
+    </a>
+
+    <!-- Footer -->
+    <footer style="background: var(--bg-surface); border-top: 1px solid var(--border-glass); padding: 50px 0 30px 0; margin-top: auto;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; margin-bottom: 40px;">
+            <!-- Brand Column -->
+            <div>
+                <div class="brand-logo" style="margin-bottom: 12px;">
+                    <span style="font-size: 1.6rem;">🤝</span>
+                    <span>CampusLend</span>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 16px;">
+                    An exclusive emergency borrowing network connecting students of <strong>Uka Tarsadia University</strong> during exams, practical labs and daily campus life.
+                </p>
+                <div style="display: flex; gap: 8px;">
+                    <span class="badge badge-verified">Campus Verified</span>
+                    <span class="badge badge-normal">Zero-Fee Peer Sharing</span>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 style="font-size: 1rem; margin-bottom: 16px; color: var(--text-main);">Campus Navigation</h4>
+                <ul style="list-style: none; padding: 0; line-height: 2;">
+                    <li><a href="/campuslend/" style="color: var(--text-muted); font-size: 0.9rem;">Live Emergency Feed</a></li>
+                    <li><a href="/campuslend/" style="color: var(--text-muted); font-size: 0.9rem;">Available Lend Catalog</a></li>
+                    <li><a href="/campuslend/how-it-works/" style="color: var(--text-muted); font-size: 0.9rem;">How It Works & Safety</a></li>
+                    <li><a href="/campuslend/" style="color: var(--text-muted); font-size: 0.9rem;">Top Helper Hall of Fame</a></li>
+                </ul>
+            </div>
+
+            <!-- Urgent Categories -->
+            <div>
+                <h4 style="font-size: 1rem; margin-bottom: 16px; color: var(--text-main);">Exam Essentials</h4>
+                <ul style="list-style: none; padding: 0; line-height: 2;">
+                    <li><a href="/campuslend/?category=calculators" style="color: var(--text-muted); font-size: 0.9rem;">Scientific Calculators</a></li>
+                    <li><a href="/campuslend/?category=drafting-geometry" style="color: var(--text-muted); font-size: 0.9rem;">Mini Drafters & Geometry</a></li>
+                    <li><a href="/campuslend/?category=lab-workshop" style="color: var(--text-muted); font-size: 0.9rem;">Lab Coats & Goggles</a></li>
+                    <li><a href="/campuslend/?category=chargers-power" style="color: var(--text-muted); font-size: 0.9rem;">Fast Chargers & Cables</a></li>
+                </ul>
+            </div>
+
+            <!-- Trust & Campus Domain -->
+            <div>
+                <h4 style="font-size: 1rem; margin-bottom: 16px; color: var(--text-main);">Student Safety</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 12px;">
+                    Access is strictly restricted to verified students possessing an <strong>@utu.ac.in</strong> email address.
+                </p>
+                <p style="color: var(--text-light); font-size: 0.8rem;">
+                    Campus Support: <a href="mailto:campuslend@utu.ac.in" style="color: var(--primary);">campuslend@utu.ac.in</a>
+                </p>
+            </div>
+        </div>
+
+        <div style="border-top: 1px solid var(--border-glass); padding-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; font-size: 0.85rem; color: var(--text-light);">
+            <div>
+                © 2026 CampusLend – Uka Tarsadia University. Built with pride for campus collaboration.
+            </div>
+            <div style="display: flex; gap: 20px;">
+                <span>🔒 Secure Sessions</span>
+                <span>⚡ Real-Time Matching</span>
+                <span>🌟 Peer Trust Score</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="mobile-bottom-nav">
+    <a href="/campuslend/" class="mobile-nav-item ">
+        <i data-lucide="radio"></i>
+        <span>Live Feed</span>
+    </a>
+    
+    <a href="/campuslend/" class="mobile-nav-item ">
+        <i data-lucide="package-search"></i>
+        <span>Catalog</span>
+    </a>
+
+    <a href="/campuslend/login/" class="mobile-nav-item" style="color: #ef4444; font-weight: 700;">
+        <div style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: #fff; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4); margin-top: -18px;">
+            <i data-lucide="plus" style="width: 24px; height: 24px;"></i>
+        </div>
+        <span style="margin-top: 2px;">Request</span>
+    </a>
+
+    <a href="/campuslend/login/" class="mobile-nav-item">
+        <i data-lucide="repeat"></i>
+        <span>Activity</span>
+    </a>
+
+    <a href="/campuslend/login/" class="mobile-nav-item">
+        <i data-lucide="user"></i>
+        <span>Profile</span>
+    </a>
+</nav>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="/campuslend/assets/js/main.js?v=1792520315"></script>
+    <script>
+        // Initialize Lucide icons
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const forms = document.querySelectorAll('form');
+    forms.forEach(function(f) {
+        f.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (window.CampusLend && window.CampusLend.toast) {
+                window.CampusLend.toast('Static design preview – login & registration require the local PHP backend.', 'warning');
+            } else {
+                alert('Static design preview – login & registration require the local PHP backend.');
+            }
+            return false;
+        });
+    });
+});
+</script>
+
+</body>
+</html>

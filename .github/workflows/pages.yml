@@ -1,4 +1,4 @@
-name: Deploy static demo to GitHub Pages
+name: Deploy static preview to GitHub Pages
 
 on:
   push:
@@ -10,67 +10,25 @@ permissions:
   pages: write
   id-token: write
 
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.2'
-          extensions: pdo_sqlite, sqlite3, mbstring
-
-      - name: Prepare env
-        run: |
-          cp .env.example .env
-          mkdir -p public/uploads/items public/uploads/avatars
-
-      - name: Start PHP server
-        run: |
-          php -S 127.0.0.1:8000 -t public > server.log 2>&1 &
-          for i in 1 2 3 4 5 6 7 8 9 10; do
-            curl -s -o /dev/null http://127.0.0.1:8000/ && break
-            sleep 1
-          done
-
-      - name: Check server responds
-        run: |
-          curl -s -o /dev/null -w "Landing page HTTP status: %{http_code}\n" http://127.0.0.1:8000/
-          curl -s http://127.0.0.1:8000/ | head -n 20
-          echo "---- server log ----"
-          cat server.log || true
-
-      - name: Export pages as static HTML
-        run: |
-          mkdir site
-          cd site
-          # Landing page plus its CSS/JS/images
-          wget --mirror --convert-links --adjust-extension --page-requisites \
-               --no-parent -nH -e robots=off --content-on-error \
-               http://127.0.0.1:8000/ || true
-          # Other public pages, saved as folder/index.html
-          for p in how-it-works login register; do
-            mkdir -p "$p"
-            curl -s "http://127.0.0.1:8000/$p" -o "$p/index.html" || true
-          done
-          touch .nojekyll
-          # Point absolute links (/assets/..., /login) at the project site path
-          find . -name "*.html" -exec sed -i -E 's#(href|src|action)="/([^/])#\1="/campuslend/\2#g' {} +
-          echo "---- exported files ----"
-          ls -R . | head -n 60
-          test -f index.html || (echo "index.html missing" && exit 1)
-
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: site
-
   deploy:
-    needs: build
-    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
     steps:
-      - id: deployment
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4

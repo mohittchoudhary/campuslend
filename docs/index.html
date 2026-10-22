@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <link rel="icon" type="image/png" href="/campuslend/assets/img/icon-192.png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="6891d3715fcc957ee288e9c096cb4f1ff088689896665e94d068ca6f430b2d91">
+    <meta name="description" content="CampusLend – Emergency Campus Borrowing Platform for Uka Tarsadia University students. Borrow calculators, drafters, chargers, pens, lab coats in seconds.">
+    
+    <title>CampusLend - Emergency Campus Borrowing Platform | UTU</title>
+    
+    <!-- Google Fonts: Outfit & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons via unpkg -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- GSAP for micro-animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    
+    <!-- Core Application Stylesheet -->
+    <link rel="stylesheet" href="/campuslend/assets/css/main.css?v=1792520298">
+    <link rel="manifest" href="/campuslend/manifest.json">
+    <meta name="theme-color" content="#4f46e5">
+</head>
+<body>
+
+<!-- Static Preview Announcement Banner (Injected by export_static.py) -->
+<div class="static-preview-banner" style="background: linear-gradient(90deg, #1e1b4b 0%, #312e81 50%, #1e1b4b 100%); color: #e0e7ff; padding: 10px 16px; font-size: 0.85rem; font-weight: 500; text-align: center; border-bottom: 1px solid rgba(99, 102, 241, 0.4); display: flex; align-items: center; justify-content: center; gap: 8px; z-index: 10001; position: relative;">
+    <span style="font-size: 1rem;">ℹ️</span>
+    <span>Static design preview – login, feed and chat need the PHP backend. Run locally to use the full app.</span>
+</div>
+
+
+    <!-- Exam Season Alert Banner -->
+            <div class="exam-banner" id="exam-banner">
+        <span>📢 Mid-Term Exam Alert: Emergency requests for Calculators, Drafters, and Lab Coats are prioritized. Return borrowed items on time!</span>
+    </div>
+    
+    <!-- Header Navigation -->
+    <header class="navbar" id="main-navbar">
+    <div class="container navbar-inner">
+        <!-- Logo -->
+        <a href="/campuslend/" class="brand-logo">
+            <span style="font-size: 1.6rem;">🤝</span>
+            <span>CampusLend</span>
+            <span class="brand-badge">UTU</span>
+        </a>
+
+        <!-- Desktop Navigation Links -->
+        <nav>
+            <ul class="nav-links">
+                <li><a href="/campuslend/" class="nav-link">Live Feed</a></li>
+                <li><a href="/campuslend/" class="nav-link">Browse Items</a></li>
+                <li><a href="/campuslend/how-it-works/" class="nav-link">How It Works</a></li>
+                <li><a href="/campuslend/" class="nav-link">Leaderboard</a></li>
+            </ul>
+        </nav>
+
+        <!-- User Actions & Controls -->
+        <div class="nav-actions">
+            <!-- Dark / Light Mode Switcher -->
+            <button type="button" class="theme-toggle-btn" id="theme-toggle-btn" title="Toggle Theme" aria-label="Toggle dark and light theme">
+                <i data-lucide="moon"></i>
+            </button>
+
+                            <!-- Guest Actions -->
+                <a href="/campuslend/login/" class="btn btn-outline btn-sm">Sign In</a>
+                <a href="/campuslend/register/" class="btn btn-primary btn-sm">Join Campus</a>
+                    </div>
+    </div>
+</header>
+
+    <!-- Main Content Body -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Flash Message Alerts -->
+            
+            
+            
+            
+            <!-- Page Output Injection -->
+            <div class="landing-page">
+    <!-- Hero Section -->
+    <section style="position: relative; padding: 40px 0 70px 0; overflow: hidden;">
+        <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; align-items: center;" class="hero-grid">
+            
+            <!-- Hero Text Content -->
+            <div>
+                <div style="display: inline-flex; align-items: center; gap: 8px; background: var(--primary-light); color: var(--primary); padding: 6px 14px; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem; margin-bottom: 20px;">
+                    <span>🎓</span> Uka Tarsadia University Student Hub
+                </div>
+
+                <h1 style="font-size: clamp(2.3rem, 4vw, 3.4rem); font-weight: 900; letter-spacing: -1px; margin-bottom: 20px; line-height: 1.15;">
+                    Need a calculator or drafter <span style="background: linear-gradient(135deg, #ef4444 0%, #f59e0b 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">right now</span> for your exam?
+                </h1>
+
+                <p style="font-size: 1.15rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 32px; max-width: 580px;">
+                    Don't panic! Connect with peers in your block or floor instantly. Borrow scientific calculators, lab coats, fast chargers, drafters, or notes in minutes.
+                </p>
+
+                <!-- Strong CTAs -->
+                <div style="display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 40px;">
+                    <a href="/campuslend/register/" class="btn btn-urgent btn-lg">
+                        <span>🚨 Post Emergency Request</span>
+                    </a>
+                    <a href="/campuslend/register/" class="btn btn-outline btn-lg">
+                        <span>📦 Lend an Item</span>
+                    </a>
+                </div>
+
+                <!-- Verified Campus Trust Badge -->
+                <div style="display: flex; align-items: center; gap: 16px; font-size: 0.88rem; color: var(--text-muted);">
+                    <div style="display: flex; -space-x: 10px;">
+                        <span style="display: inline-block; width: 32px; height: 32px; border-radius: 50%; background: #6366f1; color: #fff; text-align: center; line-height: 32px; font-weight: 700; border: 2px solid var(--bg-page);">A</span>
+                        <span style="display: inline-block; width: 32px; height: 32px; border-radius: 50%; background: #ec4899; color: #fff; text-align: center; line-height: 32px; font-weight: 700; border: 2px solid var(--bg-page); margin-left: -8px;">D</span>
+                        <span style="display: inline-block; width: 32px; height: 32px; border-radius: 50%; background: #10b981; color: #fff; text-align: center; line-height: 32px; font-weight: 700; border: 2px solid var(--bg-page); margin-left: -8px;">R</span>
+                    </div>
+                    <span><strong>1,200+ students</strong> active across Engineering, Pharmacy & Management blocks.</span>
+                </div>
+            </div>
+
+            <!-- Floating Hero Illustration -->
+            <div style="position: relative; display: flex; justify-content: center; align-items: center;" class="hero-illustration">
+                <!-- Glowing background blob -->
+                <div style="position: absolute; width: 320px; height: 320px; border-radius: 50%; background: radial-gradient(circle, rgba(79, 70, 229, 0.25) 0%, rgba(239, 68, 68, 0.15) 70%, transparent 100%); filter: blur(40px); z-index: 0;"></div>
+
+                <!-- Center Campus Hub Card -->
+                <div class="glass-card" style="position: relative; z-index: 2; padding: 28px; width: 100%; max-width: 380px; text-align: center; border-radius: var(--radius-xl);">
+                    <div style="font-size: 3rem; margin-bottom: 12px;">🤝⚡</div>
+                    <h3 style="font-size: 1.3rem; margin-bottom: 6px;">CampusLend Radar</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;">Live student peer-lending active</p>
+                    
+                    <div style="background: var(--bg-surface); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-glass); text-align: left; margin-bottom: 12px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                            <span class="badge badge-critical">Critical Urgency</span>
+                            <span style="font-size: 0.75rem; color: #ef4444; font-weight: 700;">⏱️ 25m left</span>
+                        </div>
+                        <div style="font-weight: 700; font-size: 0.95rem;">Casio FX-991EX Calculator</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">📍 Block B • Exam Hall 101</div>
+                    </div>
+
+                    <div style="background: var(--bg-surface); padding: 12px; border-radius: var(--radius-md); border: 1px solid var(--border-glass); text-align: left;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                            <span class="badge badge-high">High Urgency</span>
+                            <span style="font-size: 0.75rem; color: #d97706; font-weight: 700;">⏱️ 40m left</span>
+                        </div>
+                        <div style="font-weight: 700; font-size: 0.95rem;">White Lab Coat (Size L)</div>
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">📍 Pharmacy Block • Chem Lab 1</div>
+                    </div>
+                </div>
+
+                <!-- Floating Drifting Items -->
+                <div class="floating-item" style="position: absolute; top: -15px; left: 10px; z-index: 3; background: var(--bg-surface); border: 1px solid var(--border-glass); padding: 10px 16px; border-radius: var(--radius-full); box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 700;">
+                    <span>📐</span> Mini Drafter
+                </div>
+
+                <div class="floating-item-delayed" style="position: absolute; bottom: 20px; right: -10px; z-index: 3; background: var(--bg-surface); border: 1px solid var(--border-glass); padding: 10px 16px; border-radius: var(--radius-full); box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 8px; font-size: 0.85rem; font-weight: 700;">
+                    <span>⚡</span> 65W Laptop Charger
+                </div>
+
+                <div class="floating-item" style="position: absolute; top: 180px; right: -25px; z-index: 3; background: var(--bg-surface); border: 1px solid var(--border-glass); padding: 8px 14px; border-radius: var(--radius-full); box-shadow: var(--shadow-lg); display: flex; align-items: center; gap: 6px; font-size: 0.8rem; font-weight: 700;">
+                    <span>🥼</span> Lab Coat
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Animated Platform Counters -->
+    <section style="margin-bottom: 60px;">
+        <div class="glass-card" style="padding: 30px; border-radius: var(--radius-xl);">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; text-align: center;">
+                <div>
+                    <div style="font-size: 2.5rem; font-weight: 900; color: var(--primary); font-family: var(--font-heading);">
+                        29+
+                    </div>
+                    <div style="color: var(--text-muted); font-weight: 600; font-size: 0.95rem;">Verified UTU Students</div>
+                </div>
+
+                <div>
+                    <div style="font-size: 2.5rem; font-weight: 900; color: #10b981; font-family: var(--font-heading);">
+                        16+
+                    </div>
+                    <div style="color: var(--text-muted); font-weight: 600; font-size: 0.95rem;">Emergency Asists Fulfilled</div>
+                </div>
+
+                <div>
+                    <div style="font-size: 2.5rem; font-weight: 900; color: #06b6d4; font-family: var(--font-heading);">
+                        32+
+                    </div>
+                    <div style="color: var(--text-muted); font-weight: 600; font-size: 0.95rem;">Catalog Items Available</div>
+                </div>
+
+                <div>
+                    <div style="font-size: 2.5rem; font-weight: 900; color: #ef4444; font-family: var(--font-heading);">
+                        < 4 min
+                    </div>
+                    <div style="color: var(--text-muted); font-weight: 600; font-size: 0.95rem;">Average Response Time</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Quick Chips -->
+    <section style="margin-bottom: 60px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px;">
+            <div>
+                <h2 style="font-size: 1.8rem; margin-bottom: 6px;">Browse by Campus Need</h2>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">Common exam, practical, and daily tools available on campus</p>
+            </div>
+            <a href="/campuslend/" class="btn btn-outline btn-sm">View All Catalog →</a>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 16px;">
+                            <a href="/campuslend/?category=calculators" class="glass-card" style="padding: 18px; text-align: center; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+                        <i data-lucide="calculator" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <span style="font-weight: 700; font-size: 0.9rem; color: var(--text-main);">Calculators</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">9 items available</span>
+                </a>
+                            <a href="/campuslend/?category=drafting-geometry" class="glass-card" style="padding: 18px; text-align: center; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+                        <i data-lucide="compass" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <span style="font-weight: 700; font-size: 0.9rem; color: var(--text-main);">Drafting &amp; Geometry</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">3 items available</span>
+                </a>
+                            <a href="/campuslend/?category=stationery-pens" class="glass-card" style="padding: 18px; text-align: center; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+                        <i data-lucide="pen-tool" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <span style="font-weight: 700; font-size: 0.9rem; color: var(--text-main);">Stationery &amp; Pens</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">2 items available</span>
+                </a>
+                            <a href="/campuslend/?category=lab-workshop" class="glass-card" style="padding: 18px; text-align: center; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+                        <i data-lucide="flask-conical" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <span style="font-weight: 700; font-size: 0.9rem; color: var(--text-main);">Lab &amp; Workshop</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">3 items available</span>
+                </a>
+                            <a href="/campuslend/?category=electronics-kits" class="glass-card" style="padding: 18px; text-align: center; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+                        <i data-lucide="cpu" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <span style="font-weight: 700; font-size: 0.9rem; color: var(--text-main);">Electronics &amp; Kits</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">2 items available</span>
+                </a>
+                            <a href="/campuslend/?category=chargers-power" class="glass-card" style="padding: 18px; text-align: center; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+                        <i data-lucide="battery-charging" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <span style="font-weight: 700; font-size: 0.9rem; color: var(--text-main);">Chargers &amp; Power</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">4 items available</span>
+                </a>
+                            <a href="/campuslend/?category=audio-accessories" class="glass-card" style="padding: 18px; text-align: center; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+                        <i data-lucide="headphones" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <span style="font-weight: 700; font-size: 0.9rem; color: var(--text-main);">Audio &amp; Accessories</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">2 items available</span>
+                </a>
+                            <a href="/campuslend/?category=umbrella-rainwear" class="glass-card" style="padding: 18px; text-align: center; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+                        <i data-lucide="umbrella" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <span style="font-weight: 700; font-size: 0.9rem; color: var(--text-main);">Umbrella &amp; Rainwear</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">1 items available</span>
+                </a>
+                            <a href="/campuslend/?category=id-exam-essentials" class="glass-card" style="padding: 18px; text-align: center; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+                        <i data-lucide="badge-check" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <span style="font-weight: 700; font-size: 0.9rem; color: var(--text-main);">ID &amp; Exam Essentials</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">1 items available</span>
+                </a>
+                            <a href="/campuslend/?category=notes-textbooks" class="glass-card" style="padding: 18px; text-align: center; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+                        <i data-lucide="book-open" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <span style="font-weight: 700; font-size: 0.9rem; color: var(--text-main);">Notes &amp; Textbooks</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">2 items available</span>
+                </a>
+                            <a href="/campuslend/?category=storage-flash-drives" class="glass-card" style="padding: 18px; text-align: center; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+                        <i data-lucide="hard-drive" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <span style="font-weight: 700; font-size: 0.9rem; color: var(--text-main);">Storage &amp; Flash Drives</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">1 items available</span>
+                </a>
+                            <a href="/campuslend/?category=tools-misc" class="glass-card" style="padding: 18px; text-align: center; text-decoration: none; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                    <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 1.4rem;">
+                        <i data-lucide="wrench" style="width: 24px; height: 24px;"></i>
+                    </div>
+                    <span style="font-weight: 700; font-size: 0.9rem; color: var(--text-main);">Tools &amp; Miscellaneous</span>
+                    <span style="font-size: 0.75rem; color: var(--text-muted);">2 items available</span>
+                </a>
+                    </div>
+    </section>
+
+    <!-- Live Urgent Emergency Feed Preview -->
+    <section style="margin-bottom: 60px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px;">
+            <div>
+                <div style="display: inline-flex; align-items: center; gap: 6px; color: #ef4444; font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 4px;">
+                    <span style="width: 8px; height: 8px; border-radius: 50%; background: #ef4444; animation: pulse-critical 1.5s infinite;"></span>
+                    Live Campus Radar
+                </div>
+                <h2 style="font-size: 1.8rem;">Active Emergency Requests</h2>
+            </div>
+            <a href="/campuslend/" class="btn btn-primary btn-sm">Full Live Feed →</a>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px;">
+                                                                    <div class="glass-card" style="padding: 22px; position: relative; border-left: 4px solid #ef4444;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span class="badge badge-critical">
+                                🚨 Critical                            </span>
+                            <span class="countdown-badge" data-countdown="1792519675" style="font-size: 0.82rem; font-weight: 700; color: #ef4444;">
+                                Expired                            </span>
+                        </div>
+
+                        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">
+                            <a href="/campuslend/login/" style="color: var(--text-main);">
+                                Scientific Calculator (any FX model)                            </a>
+                        </h3>
+
+                        <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
+                            <span>📍 <strong>Block C</strong> (Room 302)</span>
+                        </div>
+
+                                                    <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                                Thermodynamics class test. Please help if anyone is in Block C!                            </p>
+                        
+                        <div style="border-top: 1px solid var(--border-glass); padding-top: 14px; display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700;">
+                                    Y                                </div>
+                                <span style="font-size: 0.85rem; font-weight: 600;">Yash</span>
+                                <span style="font-size: 0.8rem; color: #f59e0b;">⭐ 4.8</span>
+                            </div>
+
+                            <a href="/campuslend/login/" class="btn btn-primary btn-sm">
+                                I Can Lend This
+                            </a>
+                        </div>
+                    </div>
+                                                        <div class="glass-card" style="padding: 22px; position: relative; border-left: 4px solid #ef4444;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span class="badge badge-critical">
+                                🚨 Critical                            </span>
+                            <span class="countdown-badge" data-countdown="1792521775" style="font-size: 0.82rem; font-weight: 700; color: #ef4444;">
+                                Expired                            </span>
+                        </div>
+
+                        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">
+                            <a href="/campuslend/login/" style="color: var(--text-main);">
+                                Male to Female Jumper Wires (10 pcs)                            </a>
+                        </h3>
+
+                        <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
+                            <span>📍 <strong>Block B</strong> (Hardware Lab 3)</span>
+                        </div>
+
+                                                    <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                                Hardware viva demonstration in 45 minutes, need jumper wires to finish breadboard circuit.                            </p>
+                        
+                        <div style="border-top: 1px solid var(--border-glass); padding-top: 14px; display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700;">
+                                    J                                </div>
+                                <span style="font-size: 0.85rem; font-weight: 600;">Jayraj</span>
+                                <span style="font-size: 0.8rem; color: #f59e0b;">⭐ 4.9</span>
+                            </div>
+
+                            <a href="/campuslend/login/" class="btn btn-primary btn-sm">
+                                I Can Lend This
+                            </a>
+                        </div>
+                    </div>
+                                                        <div class="glass-card" style="padding: 22px; position: relative; border-left: 4px solid #ef4444;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span class="badge badge-critical">
+                                🚨 Critical                            </span>
+                            <span class="countdown-badge" data-countdown="1792520575" style="font-size: 0.82rem; font-weight: 700; color: #ef4444;">
+                                Expired                            </span>
+                        </div>
+
+                        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">
+                            <a href="/campuslend/login/" style="color: var(--text-main);">
+                                Lab Coat (Size L or XL)                            </a>
+                        </h3>
+
+                        <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
+                            <span>📍 <strong>Pharmacy Block</strong> (Chem Lab 1)</span>
+                        </div>
+
+                                                    <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                                Lab assistant won&#039;t allow entry without a lab coat. Organic synthesis exam in 30 mins!                            </p>
+                        
+                        <div style="border-top: 1px solid var(--border-glass); padding-top: 14px; display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700;">
+                                    H                                </div>
+                                <span style="font-size: 0.85rem; font-weight: 600;">Harsh</span>
+                                <span style="font-size: 0.8rem; color: #f59e0b;">⭐ 4.6</span>
+                            </div>
+
+                            <a href="/campuslend/login/" class="btn btn-primary btn-sm">
+                                I Can Lend This
+                            </a>
+                        </div>
+                    </div>
+                                                        <div class="glass-card" style="padding: 22px; position: relative; border-left: 4px solid #f59e0b;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span class="badge badge-high">
+                                ⚡ High                            </span>
+                            <span class="countdown-badge" data-countdown="1792525137" style="font-size: 0.82rem; font-weight: 700; color: #d97706;">
+                                Expired                            </span>
+                        </div>
+
+                        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">
+                            <a href="/campuslend/login/" style="color: var(--text-main);">
+                                calculor                            </a>
+                        </h3>
+
+                        <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
+                            <span>📍 <strong>Block B</strong> (b003)</span>
+                        </div>
+
+                        
+                        <div style="border-top: 1px solid var(--border-glass); padding-top: 14px; display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700;">
+                                    P                                </div>
+                                <span style="font-size: 0.85rem; font-weight: 600;">Prof.</span>
+                                <span style="font-size: 0.8rem; color: #f59e0b;">⭐ 5.0</span>
+                            </div>
+
+                            <a href="/campuslend/login/" class="btn btn-primary btn-sm">
+                                I Can Lend This
+                            </a>
+                        </div>
+                    </div>
+                                                        <div class="glass-card" style="padding: 22px; position: relative; border-left: 4px solid #f59e0b;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span class="badge badge-high">
+                                ⚡ High                            </span>
+                            <span class="countdown-badge" data-countdown="1792528975" style="font-size: 0.82rem; font-weight: 700; color: #d97706;">
+                                Expired                            </span>
+                        </div>
+
+                        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">
+                            <a href="/campuslend/login/" style="color: var(--text-main);">
+                                Dissection Box / Kit                            </a>
+                        </h3>
+
+                        <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
+                            <span>📍 <strong>Life Sciences Dept</strong> (Zoology Lab)</span>
+                        </div>
+
+                                                    <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                                Biology practical batch B starting at 2:30 PM.                            </p>
+                        
+                        <div style="border-top: 1px solid var(--border-glass); padding-top: 14px; display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700;">
+                                    K                                </div>
+                                <span style="font-size: 0.85rem; font-weight: 600;">Kavya</span>
+                                <span style="font-size: 0.8rem; color: #f59e0b;">⭐ 4.9</span>
+                            </div>
+
+                            <a href="/campuslend/login/" class="btn btn-primary btn-sm">
+                                I Can Lend This
+                            </a>
+                        </div>
+                    </div>
+                                                        <div class="glass-card" style="padding: 22px; position: relative; border-left: 4px solid #f59e0b;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                            <span class="badge badge-high">
+                                ⚡ High                            </span>
+                            <span class="countdown-badge" data-countdown="1792525375" style="font-size: 0.82rem; font-weight: 700; color: #d97706;">
+                                Expired                            </span>
+                        </div>
+
+                        <h3 style="font-size: 1.15rem; margin-bottom: 8px;">
+                            <a href="/campuslend/login/" style="color: var(--text-main);">
+                                Digital Multimeter                            </a>
+                        </h3>
+
+                        <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
+                            <span>📍 <strong>Block C</strong> (Power Electronics Lab)</span>
+                        </div>
+
+                                                    <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 16px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">
+                                Testing DC-DC converter output voltage before teacher inspection.                            </p>
+                        
+                        <div style="border-top: 1px solid var(--border-glass); padding-top: 14px; display: flex; justify-content: space-between; align-items: center;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700;">
+                                    B                                </div>
+                                <span style="font-size: 0.85rem; font-weight: 600;">Bhavya</span>
+                                <span style="font-size: 0.8rem; color: #f59e0b;">⭐ 5.0</span>
+                            </div>
+
+                            <a href="/campuslend/login/" class="btn btn-primary btn-sm">
+                                I Can Lend This
+                            </a>
+                        </div>
+                    </div>
+                                    </div>
+    </section>
+
+    <!-- Trust & Safety Section -->
+    <section style="margin-bottom: 40px;">
+        <div class="glass-card" style="padding: 40px; border-radius: var(--radius-xl); background: linear-gradient(135deg, rgba(79, 70, 229, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);">
+            <div style="text-align: center; max-width: 600px; margin: 0 auto 36px auto;">
+                <h2 style="font-size: 2rem; margin-bottom: 10px;">Built on Student Trust</h2>
+                <p style="color: var(--text-muted);">How CampusLend guarantees zero theft, on-time returns, and friendly campus accountability.</p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px;">
+                <div style="background: var(--bg-surface); padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border-glass);">
+                    <div style="font-size: 1.8rem; margin-bottom: 12px;">🛡️</div>
+                    <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Campus Domain Lock</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">
+                        Strict registration restricted exclusively to <strong>@utu.ac.in</strong>. Every student is verified with an enrollment number and department.
+                    </p>
+                </div>
+
+                <div style="background: var(--bg-surface); padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border-glass);">
+                    <div style="font-size: 1.8rem; margin-bottom: 12px;">🤝</div>
+                    <h3 style="font-size: 1.15rem; margin-bottom: 8px;">2-Way Handover Confirmation</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">
+                        Both borrower and lender independently confirm item collection and return inside the app. No disputes about who has what.
+                    </p>
+                </div>
+
+                <div style="background: var(--bg-surface); padding: 24px; border-radius: var(--radius-lg); border: 1px solid var(--border-glass);">
+                    <div style="font-size: 1.8rem; margin-bottom: 12px;">⭐</div>
+                    <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Peer Trust Scores & Badges</h3>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">
+                        Earn badges like <strong>"Exam Saviour"</strong> and <strong>"Campus Hero"</strong>. Students with late returns receive automated alerts and trust score penalties.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+        </div>
+    </main>
+
+    <!-- Floating Emergency SOS Button -->
+    <a href="/campuslend/login/" class="floating-sos-btn" id="floating-sos-btn" title="One-Click Emergency Request">
+        <span>🚨</span>
+        <span>SOS Request</span>
+    </a>
+
+    <!-- Footer -->
+    <footer style="background: var(--bg-surface); border-top: 1px solid var(--border-glass); padding: 50px 0 30px 0; margin-top: auto;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; margin-bottom: 40px;">
+            <!-- Brand Column -->
+            <div>
+                <div class="brand-logo" style="margin-bottom: 12px;">
+                    <span style="font-size: 1.6rem;">🤝</span>
+                    <span>CampusLend</span>
+                </div>
+                <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6; margin-bottom: 16px;">
+                    An exclusive emergency borrowing network connecting students of <strong>Uka Tarsadia University</strong> during exams, practical labs and daily campus life.
+                </p>
+                <div style="display: flex; gap: 8px;">
+                    <span class="badge badge-verified">Campus Verified</span>
+                    <span class="badge badge-normal">Zero-Fee Peer Sharing</span>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div>
+                <h4 style="font-size: 1rem; margin-bottom: 16px; color: var(--text-main);">Campus Navigation</h4>
+                <ul style="list-style: none; padding: 0; line-height: 2;">
+                    <li><a href="/campuslend/" style="color: var(--text-muted); font-size: 0.9rem;">Live Emergency Feed</a></li>
+                    <li><a href="/campuslend/" style="color: var(--text-muted); font-size: 0.9rem;">Available Lend Catalog</a></li>
+                    <li><a href="/campuslend/how-it-works/" style="color: var(--text-muted); font-size: 0.9rem;">How It Works & Safety</a></li>
+                    <li><a href="/campuslend/" style="color: var(--text-muted); font-size: 0.9rem;">Top Helper Hall of Fame</a></li>
+                </ul>
+            </div>
+
+            <!-- Urgent Categories -->
+            <div>
+                <h4 style="font-size: 1rem; margin-bottom: 16px; color: var(--text-main);">Exam Essentials</h4>
+                <ul style="list-style: none; padding: 0; line-height: 2;">
+                    <li><a href="/campuslend/?category=calculators" style="color: var(--text-muted); font-size: 0.9rem;">Scientific Calculators</a></li>
+                    <li><a href="/campuslend/?category=drafting-geometry" style="color: var(--text-muted); font-size: 0.9rem;">Mini Drafters & Geometry</a></li>
+                    <li><a href="/campuslend/?category=lab-workshop" style="color: var(--text-muted); font-size: 0.9rem;">Lab Coats & Goggles</a></li>
+                    <li><a href="/campuslend/?category=chargers-power" style="color: var(--text-muted); font-size: 0.9rem;">Fast Chargers & Cables</a></li>
+                </ul>
+            </div>
+
+            <!-- Trust & Campus Domain -->
+            <div>
+                <h4 style="font-size: 1rem; margin-bottom: 16px; color: var(--text-main);">Student Safety</h4>
+                <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.6; margin-bottom: 12px;">
+                    Access is strictly restricted to verified students possessing an <strong>@utu.ac.in</strong> email address.
+                </p>
+                <p style="color: var(--text-light); font-size: 0.8rem;">
+                    Campus Support: <a href="mailto:campuslend@utu.ac.in" style="color: var(--primary);">campuslend@utu.ac.in</a>
+                </p>
+            </div>
+        </div>
+
+        <div style="border-top: 1px solid var(--border-glass); padding-top: 24px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; font-size: 0.85rem; color: var(--text-light);">
+            <div>
+                © 2026 CampusLend – Uka Tarsadia University. Built with pride for campus collaboration.
+            </div>
+            <div style="display: flex; gap: 20px;">
+                <span>🔒 Secure Sessions</span>
+                <span>⚡ Real-Time Matching</span>
+                <span>🌟 Peer Trust Score</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="mobile-bottom-nav">
+    <a href="/campuslend/" class="mobile-nav-item ">
+        <i data-lucide="radio"></i>
+        <span>Live Feed</span>
+    </a>
+    
+    <a href="/campuslend/" class="mobile-nav-item ">
+        <i data-lucide="package-search"></i>
+        <span>Catalog</span>
+    </a>
+
+    <a href="/campuslend/login/" class="mobile-nav-item" style="color: #ef4444; font-weight: 700;">
+        <div style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); color: #fff; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4); margin-top: -18px;">
+            <i data-lucide="plus" style="width: 24px; height: 24px;"></i>
+        </div>
+        <span style="margin-top: 2px;">Request</span>
+    </a>
+
+    <a href="/campuslend/login/" class="mobile-nav-item">
+        <i data-lucide="repeat"></i>
+        <span>Activity</span>
+    </a>
+
+    <a href="/campuslend/login/" class="mobile-nav-item">
+        <i data-lucide="user"></i>
+        <span>Profile</span>
+    </a>
+</nav>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="/campuslend/assets/js/main.js?v=1792520315"></script>
+    <script>
+        // Initialize Lucide icons
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    </script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const forms = document.querySelectorAll('form');
+    forms.forEach(function(f) {
+        f.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (window.CampusLend && window.CampusLend.toast) {
+                window.CampusLend.toast('Static design preview – login & registration require the local PHP backend.', 'warning');
+            } else {
+                alert('Static design preview – login & registration require the local PHP backend.');
+            }
+            return false;
+        });
+    });
+});
+</script>
+
+</body>
+</html>
